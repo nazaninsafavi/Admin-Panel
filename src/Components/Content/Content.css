@@ -1,0 +1,9 @@
+.Surface{
+    height: 650px;
+    background-color: rgb(247, 234, 219);
+    justify-content: center;
+}
+
+.title{
+    margin-top: 10px;
+}
