@@ -17,7 +17,7 @@ return(
             <div className='Lists'>
                 <ul>
                     <li className='list'>
-                        <Link className='link' to='/'>Users</Link>
+                        <Link className='link' to='/User'>Users</Link>
                     </li>
                     <li className='list'>
                         <Link className='link' to='/Posts'>Posts</Link>

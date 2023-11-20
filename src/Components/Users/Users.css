@@ -17,3 +17,10 @@
     width:90%;
     margin-top: 25px;
 }
+
+.icon{
+    font-size: 18px;
+    margin:8px 10px;
+    cursor: pointer;
+
+}
