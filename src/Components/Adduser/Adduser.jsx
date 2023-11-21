@@ -1,8 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Adduser=()=>{
     const {userId} =useParams();
+    const navigate=useNavigate()
     return(
         <div className= 'mt-1 p-4 container-fluid container'>
             <h4 className="text-center text-primary">
@@ -39,7 +40,8 @@ const Adduser=()=>{
                     </div>
 
                     <div className="col-12 text-start">
-                        <button type="button" class="btn btn-danger ms-2 ">Back</button>
+                        <button type="button" class="btn btn-danger ms-2 "
+                        onClick={()=>navigate('/User')}>Back</button>
                         <button type="submit" class="btn btn-primary ml-2" >
                             {userId ? 'Edit' : 'Submit'}
                         </button>

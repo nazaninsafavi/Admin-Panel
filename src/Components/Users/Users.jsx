@@ -2,10 +2,11 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import Table from 'react-bootstrap/Table'
 import './Users.css'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 const Users=()=>{
+    const navigate =useNavigate()
     return(
         <div>
              <div className="d-flex justify-content-between">
@@ -35,9 +36,11 @@ const Users=()=>{
                             <td>Mackesy</td>
                             <td>elle.mackesy@gmail.com</td>
                             <td>
-                                <Link to='/User/Add/2'>
-                                <i class="fa fa-edit icon" aria-hidden="true"></i>
-                                </Link>
+                                <i class="fa fa-edit icon" aria-hidden="true"
+                                onClick={()=>{
+                                    return navigate("/User/Add/2")
+                                }}></i>
+                                
                                 
                             <i class="fa fa-trash icon" aria-hidden="true"></i>
                             </td>
