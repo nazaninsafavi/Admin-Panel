@@ -3,10 +3,25 @@ import { Button } from "react-bootstrap"
 import Table from 'react-bootstrap/Table'
 import './Users.css'
 import { Link, useNavigate } from "react-router-dom"
+import swal from 'sweetalert';
 
 
 const Users=()=>{
     const navigate =useNavigate()
+    const handleDelete=(itemId)=>{
+        swal({
+            title: "Are you sure?",
+            text: `Are you sure that you want to delete record ${itemId}?`,
+            icon: "warning",
+            dangerMode: true,
+          })
+          .then(willDelete => {
+            if (willDelete) {
+              swal("Deleted!", "Your imaginary file has been deleted!", "success");
+            }
+          });
+
+    }
     return(
         <div>
              <div className="d-flex justify-content-between">
@@ -42,7 +57,8 @@ const Users=()=>{
                                 }}></i>
                                 
                                 
-                            <i class="fa fa-trash icon" aria-hidden="true"></i>
+                            <i class="fa fa-trash icon" aria-hidden="true"
+                            onClick={()=>handleDelete(1)}></i>
                             </td>
 
                         </tr>
