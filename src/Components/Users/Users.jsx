@@ -20,14 +20,36 @@ const Users=()=>{
     },[])
     const handleDelete=(itemId)=>{
         swal({
-            title: "Are you sure?",
-            text: `Are you sure that you want to delete record ${itemId}?`,
+            title: `Are you sure you want to delete item ${itemId}?`,
+            text: "Once deleted, you will not be able to recover this imaginary file!",
             icon: "warning",
+            buttons: true,
             dangerMode: true,
           })
-          .then(willDelete => {
+          .then((willDelete) => {
             if (willDelete) {
-              swal("Deleted!", "Your imaginary file has been deleted!", "success");
+                axios({
+                    method:'DELETE',
+                    url:`https://jsonplaceholder.typicode.com/users/${itemId}`
+                }).then(res=>{
+                    //console.log(res)
+                    if(res.status===200){
+                        const newUsers=users.filter(u=>u.id !==itemId);
+                        setUsers(newUsers)
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                            button: "Ok"
+                          });
+                    }else{
+                        swal("An error has occured!" , {
+                            icon:"error",
+                            button: "Got it"
+                        })
+                    }
+                })
+            
+            } else {
+              swal("Your imaginary file is safe!");
             }
           });
 
@@ -48,7 +70,7 @@ const Users=()=>{
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>First Name</th>
+                            <th>First/Last Name</th>
                             <th>User Name</th>
                             <th>Email</th>
                             <th>Operations</th>
@@ -57,23 +79,23 @@ const Users=()=>{
                     </thead>
                     <tbody>
                         {users.map(u=>(
-                                  <tr>
+                            <tr key={u.id}>
                                   <td>{u.id}</td>
                                   <td>{u.name}</td>
                                   <td>{u.username}</td>
                                   <td>{u.email}</td>
                                   <td>
-                                      <i class="fa fa-edit icon" aria-hidden="true"
+                                      <i class="fa fa-edit icon-edit" aria-hidden="true"
                                       onClick={()=>{
                                           return navigate("/User/Add/2")
                                       }}></i>
                                       
                                       
                                   <i class="fa fa-trash icon" aria-hidden="true"
-                                  onClick={()=>handleDelete(1)}></i>
+                                  onClick={()=>handleDelete(u.id)}></i>
                                   </td>
       
-                              </tr>
+                            </tr>
 
                         ))}
                   

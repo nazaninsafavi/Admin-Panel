@@ -22,5 +22,13 @@
     font-size: 18px;
     margin:8px 10px;
     cursor: pointer;
+    color:red
+
+}
+.icon-edit{
+    font-size: 18px;
+    margin:8px 10px;
+    cursor: pointer;
+    color:blue
 
 }
