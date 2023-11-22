@@ -1,13 +1,23 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "react-bootstrap"
 import Table from 'react-bootstrap/Table'
 import './Users.css'
 import { Link, useNavigate } from "react-router-dom"
 import swal from 'sweetalert';
-
+import axios from "axios"
 
 const Users=()=>{
     const navigate =useNavigate()
+    const [users ,setUsers]=useState([]);
+
+    useEffect(()=>{
+        axios.get('https://jsonplaceholder.typicode.com/users').then(res=>{
+            setUsers(res.data);
+        }).catch(err=>{
+            console.log(err)
+        })
+
+    },[])
     const handleDelete=(itemId)=>{
         swal({
             title: "Are you sure?",
@@ -33,37 +43,47 @@ const Users=()=>{
                
              </div>
              <div className="d-flex justify-content-center table">
-                <Table>
+                {users.length ? (
+                    <Table>
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>User Name</th>
                             <th>Email</th>
                             <th>Operations</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Elle</td>
-                            <td>Mackesy</td>
-                            <td>elle.mackesy@gmail.com</td>
-                            <td>
-                                <i class="fa fa-edit icon" aria-hidden="true"
-                                onClick={()=>{
-                                    return navigate("/User/Add/2")
-                                }}></i>
-                                
-                                
-                            <i class="fa fa-trash icon" aria-hidden="true"
-                            onClick={()=>handleDelete(1)}></i>
-                            </td>
+                        {users.map(u=>(
+                                  <tr>
+                                  <td>{u.id}</td>
+                                  <td>{u.name}</td>
+                                  <td>{u.username}</td>
+                                  <td>{u.email}</td>
+                                  <td>
+                                      <i class="fa fa-edit icon" aria-hidden="true"
+                                      onClick={()=>{
+                                          return navigate("/User/Add/2")
+                                      }}></i>
+                                      
+                                      
+                                  <i class="fa fa-trash icon" aria-hidden="true"
+                                  onClick={()=>handleDelete(1)}></i>
+                                  </td>
+      
+                              </tr>
 
-                        </tr>
+                        ))}
+                  
                     </tbody>
                 </Table>
+
+                ) : (
+                    <h4 className="text-center text-info">Please wait...</h4>
+                )}
+                
 
              </div>
 
