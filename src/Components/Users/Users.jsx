@@ -9,10 +9,13 @@ import axios from "axios"
 const Users=()=>{
     const navigate =useNavigate()
     const [users ,setUsers]=useState([]);
+    const [mainUsers ,setMainUsers]=useState([]);
+
 
     useEffect(()=>{
         axios.get('https://jsonplaceholder.typicode.com/users').then(res=>{
             setUsers(res.data);
+            setMainUsers(res.data)
         }).catch(err=>{
             console.log(err)
         })
@@ -54,10 +57,14 @@ const Users=()=>{
           });
 
     }
+    const handleSearch=(e)=>{
+        setUsers(mainUsers.filter(u=>u.name.includes(e.target.value)))
+        //console.log(e.target.value)
+    }
     return(
         <div>
              <div className="d-flex justify-content-between">
-                  <input type="text" className="myUser" placeholder="Search User"></input>
+                  <input type="text" className="myUser" placeholder="Search User" onChange={handleSearch}></input>
                   <Link to='/User/Add'>
                     <Button className="btn btn-success myBtn">+</Button>
                   </Link>
@@ -87,7 +94,7 @@ const Users=()=>{
                                   <td>
                                       <i class="fa fa-edit icon-edit" aria-hidden="true"
                                       onClick={()=>{
-                                          return navigate("/User/Add/2")
+                                          return navigate(`/User/Add/${u.id}`)
                                       }}></i>
                                       
                                       

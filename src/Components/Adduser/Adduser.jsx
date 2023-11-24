@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 
 const Adduser=()=>{
     const {userId} =useParams();
@@ -21,10 +22,44 @@ const Adduser=()=>{
     const handleAdduser=(e)=>{
         e.preventDefault();
         //console.log(data)
-        axios.post('https://jsonplaceholder.typicode.com/users', data).then(res=>{
-            console.log(res)
-        })
+        if(!userId){
+            axios.post('https://jsonplaceholder.typicode.com/users', data).then(res=>{
+            console.log(res);
+            swal(`User ${res.data.name} is successfuly added!`,{
+                icon: 'success',
+                button:'ok'
+            })
+            
+        });
+        }else{
+            axios.put(`https://jsonplaceholder.typicode.com/users/${userId}`, data).then(res=>{
+            console.log(res);
+            swal(`User ${res.data.name} is edited!`,{
+                icon:'success',
+                button:'ok'
+            })
+        });
+        }
     }
+
+    useEffect(()=>{
+
+        axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`).then(res=>{
+            setData({
+                name: res.data.name ,
+                username : res.data.username ,
+                email : res.data.email,
+                address : {
+                    street: res.data.address.street ,
+                    city: res.data.address.city ,
+                    suite: res.data.address.suite ,
+                    zipcode: res.data.address.zipcode 
+                }
+            })
+        });
+
+
+    },[])
 
 
 
