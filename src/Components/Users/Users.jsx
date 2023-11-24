@@ -92,13 +92,13 @@ const Users=()=>{
                                   <td>{u.username}</td>
                                   <td>{u.email}</td>
                                   <td>
-                                      <i class="fa fa-edit icon-edit" aria-hidden="true"
+                                      <i className="fa fa-edit icon-edit" aria-hidden="true"
                                       onClick={()=>{
                                           return navigate(`/User/Add/${u.id}`)
                                       }}></i>
                                       
                                       
-                                  <i class="fa fa-trash icon" aria-hidden="true"
+                                  <i className="fa fa-trash icon" aria-hidden="true"
                                   onClick={()=>handleDelete(u.id)}></i>
                                   </td>
       

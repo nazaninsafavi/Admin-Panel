@@ -93,7 +93,7 @@ const Adduser=()=>{
                         }}/>
                     </div>
                     <div className="mb-3 row">
-                        <label  className="form-label">Address</label>
+                        <label className="form-label">Address</label>
                         <div className="col-6 my-1">
                             <input type="text" className="form-control" placeholder="city" value={data.address.city}
                             onChange={(e)=>setData({...data, address:{...data.address,city:e.target.value}})}/>
@@ -113,7 +113,7 @@ const Adduser=()=>{
                     </div>
 
                     <div className="col-12 text-start">
-                        <button type="button" class="btn btn-danger ms-2 "
+                        <button type="button" className="btn btn-danger ms-2 "
                         onClick={()=>navigate('/User')}>Back</button>
                         <button type="submit" class="btn btn-primary ml-2" >
                             {userId ? 'Edit' : 'Submit'}

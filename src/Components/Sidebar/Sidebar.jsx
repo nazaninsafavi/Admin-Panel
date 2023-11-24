@@ -2,7 +2,7 @@ import React from 'react';
 import './Sidebar.css'
 import adminlogo from'E:/admin/src/Pics/admin_logo.png'
 import { Container } from "react-bootstrap"
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 
 
@@ -16,19 +16,28 @@ return(
             </div>
             <div className='Lists'>
                 <ul>
-                    <li className='list'>
-                        <Link className='link' to='/User'>Users</Link>
-                    </li>
-                    <li className='list'>
-                        <Link className='link' to='/Posts'>Posts</Link>
-                    </li>
-                    <li className='list'>
-                        <Link className='link' to='/Gallery'>Gallery</Link>
-                    </li>
-                    <li className='list'>
-                        <Link className='link' to='/Todos'>Todos</Link>
-                    </li>
-
+                    
+                        <NavLink className={({isActive})=>{return isActive ? 'Active_nav' : 'link'}} to='/User'>
+                        <li className='list'>  
+                            Users
+                        </li>
+                        </NavLink>
+                    
+                        <NavLink className={({isActive})=>{return isActive ? 'Active_nav' : 'link'}} to='/Posts'>
+                        <li className='list'>  
+                            Posts
+                        </li>
+                        </NavLink>
+                        <NavLink className={({isActive})=>{return isActive ? 'Active_nav' : 'link'}} to='/Gallery'>
+                        <li className='list'>  
+                            Gallery
+                        </li>
+                        </NavLink>
+                        <NavLink className={({isActive})=>{return isActive ? 'Active_nav' : 'link'}} to='/Todos'>
+                        <li className='list'>  
+                            Todos
+                        </li>  
+                        </NavLink>
                 </ul>
 
             </div>

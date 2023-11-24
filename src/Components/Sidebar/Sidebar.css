@@ -33,3 +33,9 @@ ul{
     height:50px;
 
 }
+.Active_nav{
+    color:whitesmoke;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
