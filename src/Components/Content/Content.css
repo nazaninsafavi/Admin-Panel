@@ -1,5 +1,5 @@
 .Surface{
-    height: 750px;
+    height: auto;
     background-color: rgb(247, 234, 219);
     justify-content: center;
 }

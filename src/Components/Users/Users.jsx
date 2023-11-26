@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Button } from "react-bootstrap"
+import { Button, Container,Row} from "react-bootstrap"
 import Table from 'react-bootstrap/Table'
 import './Users.css'
 import { Link, useNavigate } from "react-router-dom"
@@ -62,7 +62,8 @@ const Users=()=>{
         //console.log(e.target.value)
     }
     return(
-        <div>
+        <Container>
+            <Row>
              <div className="d-flex justify-content-between">
                   <input type="text" className="myUser" placeholder="Search User" onChange={handleSearch}></input>
                   <Link to='/User/Add'>
@@ -115,8 +116,9 @@ const Users=()=>{
                 
 
              </div>
+            </Row> 
 
-        </div>
+        </Container>
     
     )
 }
