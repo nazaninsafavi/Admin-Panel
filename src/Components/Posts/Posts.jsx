@@ -7,17 +7,33 @@ import { getPostServices } from "../../Services/PostServices"
 const Posts=()=>{
     const [posts, setPosts]=useState([])
     const navigate=useNavigate()
+    const[mainPosts, setMainPosts]=useState([])
+    const [uId,setuId]=useState([''])
 
     const getPosts = async()=>{
         const res =await getPostServices();
-        setPosts(res.data)
+        setPosts(res.data);
+        setMainPosts(res.data)
     }
     useEffect(()=>{
         getPosts();
+
+        // this function will return something when user leaved the component.
+        return()=>{
+            console.log('leave component')
+        }
+
       
     },[])
 
-    const handleSearch=()=>{}
+    useEffect(()=>{
+        handleSearch();
+    },[uId])
+
+    const handleSearch=()=>{
+        if(uId>0)setPosts(mainPosts.filter(p=>p.userId===uId))
+        else setPosts(mainPosts)
+    }
 
     const handleDelete=()=>{}
 
@@ -29,7 +45,7 @@ const Posts=()=>{
         <Container>
             <Row>
             <div className="d-flex justify-content-between">
-                  <input type="text" className="myUser" placeholder="Search User" onChange={handleSearch}></input>
+                  <input type="num" className="myUser" placeholder="Search User" onChange={(e)=>setuId(e.target.value)}></input>
                   <Link to='/Posts/Add'>
                     <Button className="btn btn-success myBtn">+</Button>
                   </Link>
